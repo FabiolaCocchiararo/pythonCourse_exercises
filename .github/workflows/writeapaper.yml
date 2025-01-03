@@ -12,7 +12,7 @@ jobs:
       DIR: L06/L06-Q3/paper
       FILE: aanda
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: LaTeX compile
@@ -40,13 +40,13 @@ jobs:
     needs: [paper]
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v2
 
       - name: Download PDF artifact
         uses: actions/download-artifact@v4
         with:
-          name: aanda.pdf  # Assicurati che il nome dell'artefatto corrisponda a quello caricato
+          name: aanda.pdf
           path: github_artifacts
 
       - name: Debug: List contents of github_artifacts
@@ -60,8 +60,8 @@ jobs:
 
       - name: Create the build branch if it doesn't exist
         run: |
-            git checkout --orphan build
-            git push origin build
+          git checkout --orphan build
+          git push origin build
 
       - name: Deploy on orphan branch
         uses: peaceiris/actions-gh-pages@v4
