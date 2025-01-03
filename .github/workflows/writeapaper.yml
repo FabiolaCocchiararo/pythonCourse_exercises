@@ -9,7 +9,6 @@ jobs:
   paper:
     runs-on: ubuntu-latest
     env:
-      # Modifica la directory dove si trova il file .tex
       DIR: L06/L06-Q3/paper
       FILE: aanda
     steps:
@@ -20,9 +19,7 @@ jobs:
         uses: xu-cheng/texlive-action@v2
         with:
           run: |
-            # Cambia nella cartella in cui si trova il file .tex
             cd ${{ env.DIR }}
-            # Compila il file .tex e crea il PDF
             pdflatex ${{ env.FILE }}
             bibtex ${{ env.FILE }}
             pdflatex ${{ env.FILE }}
@@ -30,9 +27,7 @@ jobs:
 
       - name: Move PDF to artifacts folder
         run: |
-            # Crea la cartella github_artifacts se non esiste
             mkdir -p github_artifacts
-            # Sposta il file PDF generato nella cartella temporanea
             mv ${{ env.DIR }}/${{ env.FILE }}.pdf ./github_artifacts/
 
       - name: Upload PDF as artifact
@@ -51,7 +46,7 @@ jobs:
       - name: Download PDF artifact
         uses: actions/download-artifact@v4
         with:
-          name: ${{ env.FILE }}.pdf
+          name: aanda.pdf  # Assicurati che il nome dell'artefatto corrisponda a quello caricato
           path: github_artifacts
 
       - name: Move PDF to deployment folder
