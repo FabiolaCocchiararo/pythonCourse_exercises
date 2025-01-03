@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # Edit here with the names of your latex file and directory (can use ".")
-      DIR: paper
+      DIR: L06/L06-Q3/paper
       FILE: aanda
     steps:
       - name: Checkout
