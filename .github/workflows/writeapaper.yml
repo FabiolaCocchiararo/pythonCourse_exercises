@@ -53,6 +53,11 @@ jobs:
         run: |
             mkdir -p github_deploy
             mv github_artifacts/*/* github_deploy
+      - name: Create the build branch if it doesn't exist
+        run: |
+            git checkout --orphan build
+            git push origin build
+
       - name: deploy on orphan branch
         uses: peaceiris/actions-gh-pages@v4
         with:
