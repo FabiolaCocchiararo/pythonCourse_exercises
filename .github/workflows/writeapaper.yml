@@ -49,10 +49,14 @@ jobs:
           name: aanda.pdf  # Assicurati che il nome dell'artefatto corrisponda a quello caricato
           path: github_artifacts
 
+      - name: Debug: List contents of github_artifacts
+        run: |
+          ls -l ./github_artifacts
+
       - name: Move PDF to deployment folder
         run: |
-            mkdir -p github_deploy
-            mv github_artifacts/*/* github_deploy
+          mkdir -p github_deploy
+          mv github_artifacts/*.pdf github_deploy/
 
       - name: Create the build branch if it doesn't exist
         run: |
